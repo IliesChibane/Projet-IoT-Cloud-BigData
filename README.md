@@ -40,7 +40,7 @@ sudo apt install python3
 
 ### 1) Récupération des données des capteurs avec MQTT :
 
-        On commence par créer le fichier python [sensors_data_receiver.py](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/blob/main/sensors_data_sender.py)  et on y importe les libraires nécessaire :
+On commence par créer le fichier python [sensors_data_receiver.py](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/blob/main/sensors_data_sender.py)  et on y importe les libraires nécessaire :
 
 ```python
 import paho.mqtt.client as mqttClient
@@ -132,7 +132,93 @@ Comme dit précédement nous effectuons une lecture continue de fichiers texte c
 
 ### 2) Réception des données et stockage dans un Data Lake avec Hadoop HDFS :
 
+La réception se faisant dans un programme a part nous créeons le fichier [sensors_data_receiver.py](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/blob/main/sensors_data_receiver.py) ou nous y important toutes les librairies dont nous avons besoin :
+
+```python
+import paho.mqtt.client as mqtt
+import time
+import json
+from hdfs import InsecureClient
+```
+
+Une fois fait comme lors de l'envoie nous créeons la fonction de connexion et la fonction de réception a la place de la fonction d'envoie :
+
+```python
+def on_connect(client, userdata, flags, rc):
+    """
+    Fonction de rappel pour gérer la connexion au courtier MQTT.
+    """
+    if rc == 0:
+         print("Connecté au broker")
+         global Connected                
+         Connected = True               
+    else:
+         print("Échec de la connexion")
+
+def on_message(client, userdata, message):
+    """
+    Fonction de rappel pour gérer les messages MQTT.
+    """
+    json_object = json.loads(str(message.payload.decode("utf-8")).replace("'", '"'))
+    # Stocker les valeurs de données du message dans une chaîne
+    data_values = ""
+    for key, value in json_object.items():
+        if key != "Patient":
+            data_values += str(value) + ";"
+    data_values = data_values[:-1]
+    # Enregistrer la chaîne dans un fichier CSV avec la clé comme nom de colonne du fichier
+    local_file = json_object["Patient"]+'.csv'
+    with open("csv data/"+local_file, 'a') as file:
+        file.write(data_values + "\n")
+
+    hdfs_file_path = f"{data_lake_path}/{local_file}"
+    client.upload(hdfs_file_path, "csv data/"+local_file)
+```
+
+Ici la fonction `on_message` est une fonction de rappel pour la gestion des messages MQTT. Elle convertit le payload JSON du message, extrait les valeurs de données à l'exception de la clé "Patient", les enregistre localement dans un fichier CSV portant le nom du patient, et effectue un téléchargement vers un data lake en utilisant le système de stockage distribué Hadoop Distributed File System (HDFS)  sur lequel nous reviendrons par la suite.
+
+Maintenant nous pouvons créer notre client MQTT chargé de recevoir les messages mais aussi d'initialisé notre data lake avec hadoop qui se doit d'etre créer avant le lancement de notre client.
+
+```python
+print("Création d'une nouvelle instance")
+client = mqtt.Client("python_test")
+client.on_message = on_message          # Attacher la fonction au rappel
+client.on_connect = on_connect
+print("Connexion au broker")
+
+# Création du data lake
+hdfs_url = "http://localhost:9870"
+hdfs_client = InsecureClient(hdfs_url)
+data_lake_path = "data_lake/parkinson_data"
+hdfs_client.makedirs(data_lake_path)
+
+client.connect(broker_address, port)  # Connexion au broker
+client.loop_start()                   # Démarrer la boucle
+
+
+while not Connected:                  # Attendre la connexion
+    time.sleep(0.1)
+ 
+print("Abonnement au sujet", "test/parkinson")
+client.subscribe("test/parkinson")
+ 
+try:
+    while True: 
+        time.sleep(1)
+
+except KeyboardInterrupt:
+    print("Sortie")
+    client.disconnect()
+    client.loop_stop()
+```
+
+Ce segment de code réalise tout ce qu'on avait décrit précédemment en établissant une connexion avec un courtier MQTT en utilisant la bibliothèque `paho.mqtt.client`. Une instance du client est créée, des fonctions de rappel sont attachées pour la gestion des événements de connexion et de réception de messages, et une connexion est établie avec le courtier spécifié. Parallèlement, un système de stockage distribué, représenté par Hadoop Distributed File System (HDFS), est préparé avec un répertoire dédié ("parkinson_data") pour le stockage des fichiers. Le programme s'abonne au sujet MQTT "test/parkinson" pour recevoir les messages correspondants. En entrant dans une boucle infinie, le code réagit aux messages reçus en utilisant la fonction de rappel `on_message`, enregistrant les données localement dans des fichiers CSV nommés par le patient, puis transférant ces données vers le Data Lake. L'exécution de la boucle peut être interrompue par un signal de clavier, déclenchant la déconnexion du client MQTT du courtier.
+
+**IMPORTANT :** Les deux programmes [sensors_data_receiver.py](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/blob/main/sensors_data_sender.py) et [sensors_data_receiver.py](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/blob/main/sensors_data_receiver.py) doivent etre exécuté simultanément pour le bon fonctionnement de la plateforme.
+
 ### 3) Envoie des données du Data Lake via kafka :
+
+
 
 ### 4) Réception des données et prétraitement avec Spark :
 
