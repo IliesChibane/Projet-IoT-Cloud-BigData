@@ -4,7 +4,7 @@ Dans ce tutoriel nous allons voir comment réaliser un pipeline permettant de r�
 
 Le pipeline réalisé dans ce tutoriel sera comme illustré dans la figure ci dessous :
 
-![](C:\Users\ilies\Documents\IoT-Cloud-BigData\Projet-IoT-Cloud-BigData\readme%20images\pipeline.png)
+![pipeline](readme%20images\pipeline.png)
 
 L'intégralité des outils illustré dans le pipeline seront intégrés en localhost via le langage de programmation Python et avec le système d'exploitation Ubuntu, nous passerons en revue l'integralité des installations nécessaire ainsi que la programation et paramètrage à réaliser pour faire fonctionner la pipeline.
 
