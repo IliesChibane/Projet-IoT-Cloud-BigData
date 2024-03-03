@@ -31,22 +31,27 @@ def on_message(client, userdata, message):
         file.write(data_values + "\n")
 
     hdfs_file_path = f"{data_lake_path}/{local_file}"
-    hdfs_client.upload(hdfs_file_path, "csv data/"+local_file)
+    if not hdfs_client.status(hdfs_file_path, strict=False):
+        hdfs_client.upload(hdfs_file_path, "csv data/"+local_file)
+    
+    print("Données enregistrées dans le datalake HDFS")
 
 Connected = False
  
 broker_address = "broker.hivemq.com"
 port = 1883                   
  
+hdfs_url = "http://localhost:9870"
+hdfs_client = InsecureClient(hdfs_url)
+data_lake_path = "data_lake/parkinson_data"
+if not hdfs_client.status(data_lake_path, strict=False):
+    hdfs_client.makedirs(data_lake_path)
+ 
 print("Création d'une nouvelle instance")
 client = mqtt.Client("python_test")
 client.on_message = on_message          # Attacher la fonction au rappel
 client.on_connect = on_connect
 print("Connexion au broker")
-hdfs_url = "http://localhost:9870"
-hdfs_client = InsecureClient(hdfs_url)
-data_lake_path = "data_lake/parkinson_data"
-hdfs_client.makedirs(data_lake_path)
 client.connect(broker_address, port)  # Connexion au broker
 client.loop_start()                   # Démarrer la boucle
  
