@@ -27,6 +27,7 @@ sudo apt install python3
 ```
 
 ### MQTT :
+Ce guide explique comment installer le broker MQTT Mosquitto sur Ubuntu.
 
 Étape 1 : Ajout du dépôt Mosquitto
 Ajoutez le PPA Mosquitto à vos sources de logiciels pour obtenir la dernière version de Mosquitto.
@@ -67,8 +68,34 @@ sudo service mosquitto status
 Le service Mosquitto MQTT Broker est maintenant actif et fonctionnel.
 
 ### Kafka :
+Ce guide vous aidera à installer et démarrer Apache Kafka.
+
+Étape 1 : Extraction de Kafka
+Après avoir téléchargé la dernière version de Kafka depuis le site officiel, extrayez le contenu du fichier tar.gz en utilisant la commande suivante :
+```bash
+tar -xzf kafka_2.13-3.6.1.tgz
+```
+Ensuite, accédez au répertoire de Kafka :
+```bash
+cd kafka_2.13-3.6.1
+```
+
 ![KAFKA 1](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/ef6716a3-9b5d-4cd9-8f3a-dea68c8802bf)
 
+
+Étape 2 : Démarrage du Serveur Kafka
+Initialisez le stockage de Kafka et démarrez le serveur avec les commandes suivantes :
+
+1. Générez un UUID pour le stockage Kafka et formatez-le :
+```bash
+bin/kafka-storage.sh random-uuid
+bin/kafka-storage.sh format -t <UUID> -c config/kraft/server.properties
+```
+2. Démarrez le serveur Kafka :
+```bash
+bin/kafka-server-start.sh config/kraft/server.properties
+```
+La sortie dans le terminal devrait ressembler à ce qui suit, indiquant que le serveur est actif.
 ![KAFKA 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/b81eca2b-523a-44f5-8339-e5fd662ab4b6)
 
 ### Cassandra :
