@@ -31,7 +31,7 @@ def on_message(client, userdata, message):
         file.write(data_values + "\n")
 
     hdfs_file_path = f"{data_lake_path}/{local_file}"
-    client.upload(hdfs_file_path, "csv data/"+local_file)
+    hdfs_client.upload(hdfs_file_path, "csv data/"+local_file)
 
 Connected = False
  
