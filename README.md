@@ -459,7 +459,93 @@ Cela nous donne un ensemble de données prétraitées qui suffit simplement de s
 
 ### 5) Stockage des données prétraitées dans Cassandra :
 
+Tojours sur le meme fichier python [data_preprocess.py](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/blob/main/data_preprocess.py) nous stockons les données obtenu après le prétraitement dans une base de données cassandra, pour cela nous rajoutons à nos import la ligne de code suivante :
 
+```python
+from cassandra.cluster import Cluster
+```
+
+Par la suite nous créons la classe suivante :
+
+```python
+class Cassandra:
+    def __init__(self, create_keyspace_command, data):
+        """
+        Initialiser une connexion à Cassandra, créer un espace de clés et une table,
+        puis insérer des données dans la table.
+        """
+        self.cluster = Cluster()
+        self.session = self.cluster.connect()
+        self.session.execute(create_keyspace_command)
+        self.session.execute("USE Parkinson")
+        self.session.execute("""
+            CREATE TABLE IF NOT EXISTS data (
+                L1 FLOAT,
+                L2 FLOAT,
+                L3 FLOAT,
+                L4 FLOAT,
+                L5 FLOAT,
+                L6 FLOAT,
+                L7 FLOAT,
+                L8 FLOAT,
+                R1 FLOAT,
+                R2 FLOAT,
+                R3 FLOAT,
+                R4 FLOAT,
+                R5 FLOAT,
+                R6 FLOAT,
+                R7 FLOAT,
+                R8 FLOAT,
+                L FLOAT,
+                R FLOAT,
+                Class INT,
+            )
+        """)
+        self.session.execute("TRUNCATE data")
+        self.insert_data(data)
+
+    def insert_data(self, data):
+        """
+        Insérer des données dans la table Cassandra.
+        """
+        for d in data:
+            self.session.execute(f"""
+                INSERT INTO data (
+                    L1, L2, L3, L4, L5, L6, L7, L8, R1, R2, R3, R4, R5, R6, R7, R8, L, R, Class
+                ) VALUES (
+                    {d[0]}, {d[1]}, {d[2]}, {d[3]}, {d[4]}, {d[5]}, {d[6]}, {d[7]}, {d[8]}, {d[9]}, {d[10]}, {d[11]}, {d[12]}, {d[13]}, {d[14]}, {d[15]}, {d[16]}, {d[17]}, {d[18]}
+                )
+            """)
+
+    def close(self):
+        """
+        Fermer la connexion Cassandra.
+        """
+        self.cluster.shutdown()
+```
+
+Cette classe Python, nommée `Cassandra`, est conçue pour faciliter l'intégration et la manipulation de données dans Cassandra. Son constructeur prend en paramètres une commande pour créer un keyspace Cassandra (`create_keyspace_command`) et des données à insérer (`data`). La classe initialise une connexion à Cassandra, crée un keyspace et une table appelée "data" avec des colonnes spécifiques représentant des valeurs de capteur et une classe. Ensuite, elle insère les données fournies dans la table à l'aide de la méthode `insert_data`.
+
+La méthode `insert_data` itère sur les données fournies et exécute des requêtes d'insertion Cassandra pour chaque ensemble de données. La méthode `close` permet de fermer proprement la connexion à Cassandra.
+
+Pour finir, nous créons la requete permettant de créer l'espace de clés cassandra et nous sauvegardons les données dans la base de données :
+
+```python
+# Définition des paramètres de l'espace de clés Cassandra
+keyspace_name = 'ParkinsonData'
+replication_strategy = 'SimpleStrategy'
+replication_factor = 3
+
+# Création de la requête de création de l'espace de clés
+create_keyspace_query = f"""
+    CREATE KEYSPACE IF NOT EXISTS {keyspace_name}
+    WITH replication = {{'class': '{replication_strategy}', 'replication_factor': {replication_factor}}};
+"""
+
+# Initialisation de l'instance Cassandra, insertion des données, sélection des données et fermeture de la connexion
+cassandra = Cassandra(create_keyspace_query, preprocessed_data)
+cassandra.close()
+```
 
 ### 6) Création du API REST de machine learning avec Flask et Sickit-learn :
 
