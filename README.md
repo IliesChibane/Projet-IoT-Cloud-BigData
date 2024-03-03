@@ -39,16 +39,59 @@ sudo apt install python3
 ![MQTT 5](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/13615498-a204-4d00-8160-56182aa7f7b6)
 
 ### Kafka :
+![KAFKA 1](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/ef6716a3-9b5d-4cd9-8f3a-dea68c8802bf)
+
+![KAFKA 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/b81eca2b-523a-44f5-8339-e5fd662ab4b6)
 
 ### Cassandra :
+![Cassandra 1](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/ffa62dbf-f3fe-4a3f-804c-d4d5a0579cb9)
+
+![Cassandra 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/627d5b78-8940-44b9-9250-d50ac885b979)
+
+![Cassandra 3](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/fce42517-396c-488a-8742-7a2e1c0ad71b)
+
+![Cassandra 4](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/f7449822-b792-4cb4-92c6-52a7e7d291ab)
+
+![Cassandra 5](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/75166060-3569-48ce-92bd-2dc3aefade07)
+
+![Cassandra 6](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/c09da049-2189-49df-ac09-20e9da200bed)
+
+![Cassandra 7](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/16d9658f-99ab-4f83-89e9-0d3295322947)
+
+![Cassandra 8](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/3dfb8ebe-5eeb-4f79-97ab-4df7118a89c8)
+
 
 ### MongoDB :
+![MongoDB 1](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/2fdbeffd-8481-4458-b5cb-f087931f19fc)
+![MongoDB 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/8da1aa37-c6f3-497a-9932-b24f7d183c25)
+![MongoDB 3](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/e69f0003-2fb5-49b1-a281-e38eac7d6e61)
+![MongoDB 4](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/f271b708-dfd1-4c77-989a-9f2d72d1494c)
+![MongoDB 5](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/2bf396ae-2937-4113-899e-aab793a0cae2)
+![MongoDB 6](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/48b6e78d-a43c-4281-ba16-585b577aed3f)
 
 ### ElasticSearch :
 
 ### Kibana :
 
 ### Hadoop :
+![Hadoop 1](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/e6a934d4-1104-4892-80f4-f029e436d2c6)
+![Hadoop 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/177ba3c4-be48-4c95-b33c-7f92fc052f52)
+![Hadoop 3](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/012432aa-ebe0-48cc-aad8-243f040818fe)
+![Hadoop 4](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/d6f352a4-3be4-4628-bc2d-6f58f02222f2)
+![Hadoop 5](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/39436973-1987-4dba-b52b-0017f1edabe8)
+![Hadoop 6](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/2be5a03c-0ecd-4f52-bd83-e07619d8b61a)
+![Hadoop 7](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/8decb0b0-d00a-4331-a486-f1dcfeec897e)
+![Hadoop 8](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/1a198cd3-a65c-4eb2-bb88-c6db87516932)
+![Hadoop 9](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/d95bffe8-1467-413b-a0b0-900a3287a8b9)
+![Hadoop 10](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/8f8ef206-31f9-47a9-94fc-ca1cca1b23bb)
+![Hadoop 11](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/5f83f846-360a-4dde-bf8f-b6e1d09f5cbe)
+![Hadoop 12](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/45b8a037-83ea-4b09-8479-75b3048e75af)
+![Hadoop 13](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/8c6063b0-82e7-4025-879e-140675ca1697)
+![Hadoop 14](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/43ffa409-495f-420a-acbf-7c2966fce12b)
+![Hadoop 15](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/a346d562-2893-422f-9903-4f76a228cd0d)
+![Hadoop 16](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/92c1a37f-13cb-4f3b-86f7-5099727a8eef)
+![Hadoop 17](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/3cdce8fb-d346-4f51-a397-3793c025ef1b)
+![Hadoop 18](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/813e31e8-1984-4835-a62d-51534d4d0ead)
 
 ### Spark :
 
