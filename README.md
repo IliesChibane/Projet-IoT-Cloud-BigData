@@ -259,7 +259,66 @@ Démarrez les daemons Hadoop, y compris le NameNode, le DataNode et les services
 ### Spark :
 
 ### Flask et Scikit Learn :
+Pour créer une application web Flask qui utilise Scikit-Learn pour le Machine Learning, suivez ces étapes :
+1. Installation des dépendances:
+Installez Flask et Scikit-Learn dans votre environnement de développement Python. Il est recommandé d'utiliser un environnement virtuel.
+```bash
+pip install Flask scikit-learn
+```
+2. Créer un fichier app.py:
+Créez un fichier Python nommé app.py. Ce fichier contiendra le code de votre application Flask.
 
+3. Code Flask de base:
+Écrivez le code de base pour démarrer une application Flask dans app.py.
+```python
+from flask import Flask, jsonify, request
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Bienvenue sur l'API de prédiction!"
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+4. Intégrer Scikit-Learn:
+Importez le module Scikit-Learn et créez un modèle simple. Par exemple, utilisons le dataset Iris pour entraîner un classificateur.
+```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+
+# Charger les données et diviser en jeu d'entraînement et de test
+iris = load_iris()
+X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state=42)
+
+# Créer et entraîner le modèle
+clf = RandomForestClassifier(n_estimators=10)
+clf.fit(X_train, y_train)
+```
+5. Créer une route d'API pour les prédictions:
+Ajoutez une route dans votre application Flask pour accepter les entrées et retourner les prédictions du modèle.
+```python
+@app.route('/predict', methods=['POST'])
+def predict():
+    # Obtenir les données de la requête
+    data = request.get_json(force=True)
+    # Convertir les données en une liste pour la prédiction
+    prediction = clf.predict([data['features']])
+    # Retourner la prédiction
+    return jsonify(prediction=int(prediction[0]))
+```
+6. Exécuter l'application Flask:
+Démarrez votre application Flask en exécutant app.py.
+```bash
+python app.py
+```
+7. Tester l'API:
+Testez votre API en envoyant une requête POST avec des données de features pour la prédiction. Vous pouvez utiliser curl ou un outil comme Postman.
+```bash
+curl -H "Content-Type: application/json" -X POST -d '{"features":[5.1, 3.5, 1.4, 0.2]}' http://localhost:5000/predict
+
+```
 ## Réalisation de la plateforme :
 
 ### 1) Récupération des données des capteurs avec MQTT :
