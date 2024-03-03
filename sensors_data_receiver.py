@@ -27,7 +27,7 @@ def on_message(client, userdata, message):
     data_values = data_values[:-1]
     # Enregistrer la chaîne dans un fichier CSV avec la clé comme nom de colonne du fichier
     local_file = json_object["Patient"]+'.csv'
-    with open("csv data/"+local_file, 'a') as file:
+    with open("csv data/"+local_file, 'a') as file: # Si le fichier n'existe pas dans HDFS on le sauvegarde
         file.write(data_values + "\n")
 
     hdfs_file_path = f"{data_lake_path}/{local_file}"
@@ -44,7 +44,7 @@ port = 1883
 hdfs_url = "http://localhost:9870"
 hdfs_client = InsecureClient(hdfs_url)
 data_lake_path = "data_lake/parkinson_data"
-if not hdfs_client.status(data_lake_path, strict=False):
+if not hdfs_client.status(data_lake_path, strict=False): # Si le répertoire n'existe pas dans HDFS on le crée
     hdfs_client.makedirs(data_lake_path)
  
 print("Création d'une nouvelle instance")
