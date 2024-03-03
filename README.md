@@ -28,7 +28,7 @@ sudo apt install python3
 
 ### MQTT :
 
-####Étape 1 : Ajout du dépôt Mosquitto
+*Étape 1 : Ajout du dépôt Mosquitto*
 Ajoutez le PPA Mosquitto à vos sources de logiciels pour obtenir la dernière version de Mosquitto.
 ```bash
 sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa
