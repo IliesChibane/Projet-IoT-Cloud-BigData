@@ -700,3 +700,45 @@ response = requests.post(url, files={'data': dataset})
 ```
 
 ### 8) Stockage des données retournées par l'API dans MongoDB :
+
+Les résultats de notre modèle ayant été récupéré il faut maintenant les stocker, pour cela nous utilisons MongoDB et cela toujours dans le meme programme en ajoutant simplement pour commencer cette ligne de code à nos import :
+
+```python
+import pymongo
+```
+
+Et a la fin de notre code nous ajoutons ceci :
+
+```python
+# Initialiser la connexion à MongoDB
+myclient = pymongo.MongoClient("mongodb://localhost:27017")
+mydb = myclient["mydatabase"]
+mycol = mydb["parkinson"]
+
+# Insérer un document de test, puis le supprimer
+mycol.insert_one({"test": "test"})
+mycol.drop()
+
+# Réinitialiser la collection
+mycol = mydb["parkinson"]
+
+# Vérifier si la base de données existe
+dblist = myclient.list_database_names()
+if "mydatabase" in dblist:
+    print("La base de données existe.")
+else:
+    print("La base de données n'existe pas.")
+
+# Insérer le résultat de la requête Flask dans MongoDB
+mycol.insert_one(response.json())
+
+print("Modèle et métriques d'évaluation sauvegardés dans MongoDB.")
+```
+
+Une connexion à une base de données MongoDB locale. une base de données nommée `mydatabase` aisni qu'une collection appelée `parkinson` sont créé au sein de cette base de données. Ensuite, la collection est réinitialisée et vérifiée pour confirmer son existence. Si la base de données `mydatabase` existe, elle est imprimée dans la console, sinon, un message indiquant qu'elle n'existe pas est affiché.
+
+Le script insère ensuite le résultat de notre requête Flask dans la collection MongoDB `parkinson`. Enfin, un message indiquant que le modèle et les métriques d'évaluation ont été sauvegardés dans MongoDB est affiché dans la console.
+
+### 9) Extraction des données avec ElasticSearch :
+
+### 10) Visualisation des données avec Kibana :
