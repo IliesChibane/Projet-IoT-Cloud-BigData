@@ -76,7 +76,7 @@ pip install paho-mqtt
 Ce guide vous aidera à installer et démarrer Apache Kafka.
 
 **Étape 1 :** Extraction de Kafka
-Après avoir téléchargé la dernière version de Kafka depuis le site officiel, extrayez le contenu du fichier tar.gz en utilisant la commande suivante :
+Après avoir téléchargé la dernière version de Kafka depuis le [site officiel](https://www.apache.org/dyn/closer.cgi?path=/kafka/3.7.0/kafka_2.13-3.7.0.tgz), extrayez le contenu du fichier tar.gz en utilisant la commande suivante :
 ```bash
 tar -xzf kafka_2.13-3.6.1.tgz
 ```
@@ -121,7 +121,7 @@ java -version
 ![Cassandra 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/627d5b78-8940-44b9-9250-d50ac885b979)
 
 **Étape 2 :** Téléchargement de Cassandra
-Téléchargez la dernière version de Cassandra à l'aide de 'curl' :
+Téléchargez la dernière version de [Cassandra](https://cassandra.apache.org/_/download.html) à l'aide de 'curl' :
 ```bash
 curl -OL https://dlcdn.apache.org/cassandra/4.1.3/apache-cassandra-4.1.3-bin.tar.gz
 ```
@@ -241,7 +241,7 @@ Créez un utilisateur spécifique pour Hadoop et configurez les informations d'u
 Générez une paire de clés SSH pour permettre à l'utilisateur Hadoop de se connecter en SSH sans mot de passe.
 ![Hadoop 3](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/012432aa-ebe0-48cc-aad8-243f040818fe)
 **Étape 4 :** Téléchargement de Hadoop
-Utilisez wget pour télécharger la distribution tarball de Hadoop depuis le site officiel d'Apache.
+Utilisez wget pour télécharger la distribution tarball de Hadoop depuis le [site officiel d'Apache](https://hadoop.apache.org/releases.html).
 ![Hadoop 4](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/d6f352a4-3be4-4628-bc2d-6f58f02222f2)
 **Étape 5 :** Extraction de Hadoop
 Extrayez l'archive téléchargée et déplacez le dossier Hadoop vers un emplacement souhaité.
