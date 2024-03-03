@@ -155,11 +155,52 @@ bin/nodetool status
 
 
 ### MongoDB :
+Ce guide explique comment installer MongoDB sur Ubuntu.
+
+Étape 1 :Installation des dépendances
+Installez les paquets nécessaires pour ajouter un nouveau référentiel sur votre système :
+```bash
+sudo apt install software-properties-common gnupg apt-transport-https ca-certificates -y
+```
 ![MongoDB 1](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/2fdbeffd-8481-4458-b5cb-f087931f19fc)
 ![MongoDB 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/8da1aa37-c6f3-497a-9932-b24f7d183c25)
+
+Étape 2 :Ajout du référentiel MongoDB
+Ajoutez la clé GPG officielle de MongoDB :
+```bash
+curl -fsSL https://www.mongodb.com/server-7.0.asc | sudo gpg --dearmor -o /usr/share/keyrings/mongodb-server-7.0.gpg
+```
+Ajoutez le référentiel de MongoDB à votre système :
+```bash
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+```
 ![MongoDB 3](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/e69f0003-2fb5-49b1-a281-e38eac7d6e61)
+
+Étape 3 :Mise à jour de la liste des paquets
+Mettez à jour la liste des paquets pour inclure les paquets de MongoDB :
+```bash
+sudo apt update
+```
 ![MongoDB 4](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/f271b708-dfd1-4c77-989a-9f2d72d1494c)
+
+Étape 4 :Installation de MongoDB
+Installez MongoDB en utilisant la commande suivante :
+```bash
+sudo apt install mongodb-org -y
+```
 ![MongoDB 5](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/2bf396ae-2937-4113-899e-aab793a0cae2)
+
+Étape 5 :Démarrage du service MongoDB
+Démarrez le service MongoDB et vérifiez son statut :
+```bash
+sudo systemctl start mongod
+sudo systemctl status mongod
+```
+Étape 6 :Vérification de l'installation
+Vérifiez que MongoDB est correctement installé en vérifiant la version :
+```bash
+mongod --version
+```
 ![MongoDB 6](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/48b6e78d-a43c-4281-ba16-585b577aed3f)
 
 ### ElasticSearch :
