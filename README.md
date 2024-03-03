@@ -29,7 +29,7 @@ sudo apt install python3
 ### MQTT :
 Ce guide explique comment installer le broker MQTT Mosquitto sur Ubuntu.
 
-Étape 1 : Ajout du dépôt Mosquitto
+**Étape 1 :** Ajout du dépôt Mosquitto
 Ajoutez le PPA Mosquitto à vos sources de logiciels pour obtenir la dernière version de Mosquitto.
 ```bash
 sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa
@@ -44,7 +44,7 @@ sudo apt-get update
 ![MQTT 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/ea9d4760-1f67-4c57-912c-79497c252a81)
 
 
-Étape 2 : Installation de Mosquitto
+**Étape 2 :** Installation de Mosquitto
 Installez le broker Mosquitto avec la commande suivante :
 ```bash
 sudo apt-get install mosquitto
@@ -52,14 +52,14 @@ sudo apt-get install mosquitto
 La sortie indique les paquets qui seront installés, y compris les dépendances et le paquet Mosquitto lui-même.
 ![MQTT 3](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/2e7c3712-4180-47ec-bdcd-3a9a188b002d)
 
-Étape 3 : Installation des clients Mosquitto
+**Étape 3 :** Installation des clients Mosquitto
 Installez les clients Mosquitto, qui fournissent les commandes 'mosquitto_pub' et 'mosquitto_sub' pour publier et s'abonner aux topics MQTT.
 ```bash
 sudo apt-get install mosquitto-clients
 ```
 ![MQTT 4](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/72b6650f-8f44-49bb-8c6f-97ed4f03c469)
 
-Étape 4 : Vérification du statut du service Mosquitto
+**Étape 4 :** Vérification du statut du service Mosquitto
 Vérifiez que le service Mosquitto est actif et en cours d'exécution :
 ```bash
 sudo service mosquitto status
@@ -70,7 +70,7 @@ Le service Mosquitto MQTT Broker est maintenant actif et fonctionnel.
 ### Kafka :
 Ce guide vous aidera à installer et démarrer Apache Kafka.
 
-Étape 1 : Extraction de Kafka
+**Étape 1 :** Extraction de Kafka
 Après avoir téléchargé la dernière version de Kafka depuis le site officiel, extrayez le contenu du fichier tar.gz en utilisant la commande suivante :
 ```bash
 tar -xzf kafka_2.13-3.6.1.tgz
@@ -83,7 +83,7 @@ cd kafka_2.13-3.6.1
 ![KAFKA 1](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/ef6716a3-9b5d-4cd9-8f3a-dea68c8802bf)
 
 
-Étape 2 : Démarrage du Serveur Kafka
+**Étape 2 :** Démarrage du Serveur Kafka
 Initialisez le stockage de Kafka et démarrez le serveur avec les commandes suivantes :
 
 1. Générez un UUID pour le stockage Kafka et formatez-le :
@@ -101,7 +101,7 @@ La sortie dans le terminal devrait ressembler à ce qui suit, indiquant que le s
 ### Cassandra :
 Ce guide vous aidera à installer Apache Cassandra sur votre système.
 
-Étape 1 :Prérequis
+**Étape 1 :** Prérequis
 Vérifiez la version de Java installée sur votre système avec la commande suivante :
 ```bash
 java -version
@@ -110,14 +110,14 @@ java -version
 
 ![Cassandra 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/627d5b78-8940-44b9-9250-d50ac885b979)
 
-Étape 2 :Téléchargement de Cassandra
+**Étape 2 :** Téléchargement de Cassandra
 Téléchargez la dernière version de Cassandra à l'aide de 'curl' :
 ```bash
 curl -OL https://dlcdn.apache.org/cassandra/4.1.3/apache-cassandra-4.1.3-bin.tar.gz
 ```
 ![Cassandra 3](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/fce42517-396c-488a-8742-7a2e1c0ad71b)
 
-Étape 3 :Vérification de l'intégrité du téléchargement
+**Étape 3 :** Vérification de l'intégrité du téléchargement
 Vérifiez l'intégrité du fichier téléchargé avec :
 ```bash
 gpg --print-md SHA256 apache-cassandra-4.1.3-bin.tar.gz
@@ -131,7 +131,7 @@ curl -L https://downloads.apache.org/cassandra/4.1.3/apache-cassandra-4.1.3-bin.
 ![Cassandra 5](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/75166060-3569-48ce-92bd-2dc3aefade07)
 
 
-Étape 4 :Extraction de l'archive Cassandra
+**Étape 4 :** Extraction de l'archive Cassandra
 Extrayez Cassandra avec :
 ```bash
 tar xzvf apache-cassandra-4.1.3-bin.tar.gz
@@ -139,14 +139,14 @@ tar xzvf apache-cassandra-4.1.3-bin.tar.gz
 ![Cassandra 6](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/c09da049-2189-49df-ac09-20e9da200bed)
 
 
-Étape 5 :Démarrage de Cassandra
+**Étape 5 :** Démarrage de Cassandra
 Accédez au répertoire de Cassandra et démarrez le serveur :
 ```bash
 cd apache-cassandra-4.1.3 && bin/cassandra
 ```
 ![Cassandra 7](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/16d9658f-99ab-4f83-89e9-0d3295322947)
 
-Étape 6 :Vérification du statut de Cassandra
+**Étape 6 :** Vérification du statut de Cassandra
 Utilisez la commande nodetool pour vérifier l'état du cluster Cassandra :
 ```bash
 bin/nodetool status
@@ -157,7 +157,7 @@ bin/nodetool status
 ### MongoDB :
 Ce guide explique comment installer MongoDB sur Ubuntu.
 
-Étape 1 :Installation des dépendances
+**Étape 1 :** Installation des dépendances
 Installez les paquets nécessaires pour ajouter un nouveau référentiel sur votre système :
 ```bash
 sudo apt install software-properties-common gnupg apt-transport-https ca-certificates -y
@@ -165,7 +165,7 @@ sudo apt install software-properties-common gnupg apt-transport-https ca-certifi
 ![MongoDB 1](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/2fdbeffd-8481-4458-b5cb-f087931f19fc)
 ![MongoDB 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/8da1aa37-c6f3-497a-9932-b24f7d183c25)
 
-Étape 2 :Ajout du référentiel MongoDB
+**Étape 2 :** Ajout du référentiel MongoDB
 Ajoutez la clé GPG officielle de MongoDB :
 ```bash
 curl -fsSL https://www.mongodb.com/server-7.0.asc | sudo gpg --dearmor -o /usr/share/keyrings/mongodb-server-7.0.gpg
@@ -176,27 +176,27 @@ echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gp
 ```
 ![MongoDB 3](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/e69f0003-2fb5-49b1-a281-e38eac7d6e61)
 
-Étape 3 :Mise à jour de la liste des paquets
+**Étape 3 :** Mise à jour de la liste des paquets
 Mettez à jour la liste des paquets pour inclure les paquets de MongoDB :
 ```bash
 sudo apt update
 ```
 ![MongoDB 4](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/f271b708-dfd1-4c77-989a-9f2d72d1494c)
 
-Étape 4 :Installation de MongoDB
+**Étape 4 :** Installation de MongoDB
 Installez MongoDB en utilisant la commande suivante :
 ```bash
 sudo apt install mongodb-org -y
 ```
 ![MongoDB 5](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/2bf396ae-2937-4113-899e-aab793a0cae2)
 
-Étape 5 :Démarrage du service MongoDB
+**Étape 5 :** Démarrage du service MongoDB
 Démarrez le service MongoDB et vérifiez son statut :
 ```bash
 sudo systemctl start mongod
 sudo systemctl status mongod
 ```
-Étape 6 :Vérification de l'installation
+**Étape 6 :** Vérification de l'installation
 Vérifiez que MongoDB est correctement installé en vérifiant la version :
 ```bash
 mongod --version
@@ -210,46 +210,46 @@ mongod --version
 ### Hadoop :
 Suivez ce guide pour configurer un environnement Hadoop sur votre système.
 
-Étape 1 : Installation de Java
+**Étape 1 :** Installation de Java
 Vérifiez que Java est correctement installé et configuré sur votre système.
 ![Hadoop 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/177ba3c4-be48-4c95-b33c-7f92fc052f52)
 
 
-Étape 2 : Création d'un utilisateur Hadoop
+**Étape 2 :** Création d'un utilisateur Hadoop
 Créez un utilisateur spécifique pour Hadoop et configurez les informations d'utilisateur nécessaires.
 ![Hadoop 1](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/e6a934d4-1104-4892-80f4-f029e436d2c6)
-Étape 3 : Génération des clés SSH
+**Étape 3 :** Génération des clés SSH
 Générez une paire de clés SSH pour permettre à l'utilisateur Hadoop de se connecter en SSH sans mot de passe.
 ![Hadoop 3](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/012432aa-ebe0-48cc-aad8-243f040818fe)
-Étape 4 : Téléchargement de Hadoop
+**Étape 4 :** Téléchargement de Hadoop
 Utilisez wget pour télécharger la distribution tarball de Hadoop depuis le site officiel d'Apache.
 ![Hadoop 4](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/d6f352a4-3be4-4628-bc2d-6f58f02222f2)
-Étape 5 : Extraction de Hadoop
+**Étape 5 :** Extraction de Hadoop
 Extrayez l'archive téléchargée et déplacez le dossier Hadoop vers un emplacement souhaité.
 ![Hadoop 5](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/39436973-1987-4dba-b52b-0017f1edabe8)
-Étape 6 : Configuration de l'environnement Hadoop
+**Étape 6 :** Configuration de l'environnement Hadoop
 Définissez les variables d'environnement pour Java et Hadoop dans le fichier .bashrc de l'utilisateur.
 ![Hadoop 6](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/2be5a03c-0ecd-4f52-bd83-e07619d8b61a)
 Mettez à jour le fichier .bashrc pour prendre en compte les nouvelles variables d'environnement.
 ![Hadoop 7](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/8decb0b0-d00a-4331-a486-f1dcfeec897e)
 Ajoutez le chemin d'accès à Java dans le fichier de configuration Hadoop.
 ![Hadoop 8](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/1a198cd3-a65c-4eb2-bb88-c6db87516932)
-Étape 7 : Configuration du système de fichiers HDFS
+**Étape 7 :** Configuration du système de fichiers HDFS
 Configurez le système de fichiers HDFS en modifiant les fichiers de configuration de Hadoop, notamment core-site.xml.
 ![Hadoop 9](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/d95bffe8-1467-413b-a0b0-900a3287a8b9)
 ![Hadoop 10](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/8f8ef206-31f9-47a9-94fc-ca1cca1b23bb)
 Définissez le répertoire pour le NameNode et le DataNode.
 ![Hadoop 11](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/5f83f846-360a-4dde-bf8f-b6e1d09f5cbe)
-Étape 8 : Configuration de MapReduce
+**Étape 8 :** Configuration de MapReduce
 Définissez le framework MapReduce en modifiant le fichier mapred-site.xml.
 ![Hadoop 12](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/45b8a037-83ea-4b09-8479-75b3048e75af)
-Étape 9 : Configuration de YARN
+**Étape 9 :** Configuration de YARN
 Configurez YARN en modifiant le fichier yarn-site.xml pour définir le gestionnaire de ressources et d'autres propriétés.
 ![Hadoop 13](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/8c6063b0-82e7-4025-879e-140675ca1697)
-Étape 10 : Formatage du NameNode
+**Étape 10 :** Formatage du NameNode
 Formatez le NameNode pour initialiser le système de fichiers HDFS.
 ![Hadoop 14](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/43ffa409-495f-420a-acbf-7c2966fce12b)
-Étape 11 : Démarrage des daemons Hadoop
+**Étape 11 :** Démarrage des daemons Hadoop
 Démarrez les daemons Hadoop, y compris le NameNode, le DataNode et les services YARN.
 ![Hadoop 15](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/a346d562-2893-422f-9903-4f76a228cd0d)
 ![Hadoop 16](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/92c1a37f-13cb-4f3b-86f7-5099727a8eef)
@@ -259,65 +259,9 @@ Démarrez les daemons Hadoop, y compris le NameNode, le DataNode et les services
 ### Spark :
 
 ### Flask et Scikit Learn :
-Pour créer une application web Flask qui utilise Scikit-Learn pour le Machine Learning, suivez ces étapes :
-1. Installation des dépendances:
-Installez Flask et Scikit-Learn dans votre environnement de développement Python. Il est recommandé d'utiliser un environnement virtuel.
+Pour installer flask et sickit learn il suffit d'executer la commande suivante :
 ```bash
 pip install Flask scikit-learn
-```
-2. Créer un fichier app.py:
-Créez un fichier Python nommé app.py. Ce fichier contiendra le code de votre application Flask.
-
-3. Code Flask de base:
-Écrivez le code de base pour démarrer une application Flask dans app.py.
-```python
-from flask import Flask, jsonify, request
-app = Flask(__name__)
-
-@app.route('/')
-def home():
-    return "Bienvenue sur l'API de prédiction!"
-
-if __name__ == '__main__':
-    app.run(debug=True)
-```
-4. Intégrer Scikit-Learn:
-Importez le module Scikit-Learn et créez un modèle simple. Par exemple, utilisons le dataset Iris pour entraîner un classificateur.
-```python
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-
-# Charger les données et diviser en jeu d'entraînement et de test
-iris = load_iris()
-X_train, X_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state=42)
-
-# Créer et entraîner le modèle
-clf = RandomForestClassifier(n_estimators=10)
-clf.fit(X_train, y_train)
-```
-5. Créer une route d'API pour les prédictions:
-Ajoutez une route dans votre application Flask pour accepter les entrées et retourner les prédictions du modèle.
-```python
-@app.route('/predict', methods=['POST'])
-def predict():
-    # Obtenir les données de la requête
-    data = request.get_json(force=True)
-    # Convertir les données en une liste pour la prédiction
-    prediction = clf.predict([data['features']])
-    # Retourner la prédiction
-    return jsonify(prediction=int(prediction[0]))
-```
-6. Exécuter l'application Flask:
-Démarrez votre application Flask en exécutant app.py.
-```bash
-python app.py
-```
-7. Tester l'API:
-Testez votre API en envoyant une requête POST avec des données de features pour la prédiction. Vous pouvez utiliser curl ou un outil comme Postman.
-```bash
-curl -H "Content-Type: application/json" -X POST -d '{"features":[5.1, 3.5, 1.4, 0.2]}' http://localhost:5000/predict
-
 ```
 ## Réalisation de la plateforme :
 
