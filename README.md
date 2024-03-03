@@ -1,5 +1,7 @@
 # Création d'une plateforme IoT Cloud et Big Data pour le diagnostique de la maladie de parkinson via des données de capteurs
 
+##Introduction 
+
 Dans ce tutoriel nous allons voir comment réaliser un pipeline permettant de récupérer des données de capteur et les exploiter de manière optimal afin d'obtenir une plateforme scalable permettant de se mettre à jour aisément dans le cadre du diagnostique de parkison.
 
 Le pipeline réalisé dans ce tutoriel sera comme illustré dans la figure ci dessous :
