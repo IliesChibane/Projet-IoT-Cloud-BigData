@@ -28,8 +28,18 @@ sudo apt install python3
 
 ### MQTT :
 
+####Étape 1 : Ajout du dépôt Mosquitto
+Ajoutez le PPA Mosquitto à vos sources de logiciels pour obtenir la dernière version de Mosquitto.
+```bash
+sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa
+```
+
 ![MQTT 1](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/457d0a91-6f6f-4967-8f28-d13e092d79f1)
 
+Mettez à jour la liste des paquets avec la commande suivante :
+```bash
+sudo apt-get update
+```
 ![MQTT 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/ea9d4760-1f67-4c57-912c-79497c252a81)
 
 ![MQTT 3](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/2e7c3712-4180-47ec-bdcd-3a9a188b002d)
