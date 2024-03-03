@@ -1069,6 +1069,43 @@ Une connexion à une base de données MongoDB locale. une base de données nomm�
 
 Le script insère ensuite le résultat de notre requête Flask dans la collection MongoDB `parkinson`. Enfin, un message indiquant que le modèle et les métriques d'évaluation ont été sauvegardés dans MongoDB est affiché dans la console.
 
-### 9) Extraction des données avec ElasticSearch :
+### 9) Visualisation des données avec MongoDB Atlas:
+Pour la visualisation des données, on va avoir recours à la plateforme MongoDB Atlas vu sa simplicité d'utilisation 
+et son intégration avec la MongoDB
 
-### 10) Visualisation des données avec Kibana :
+On commence d'abord par créer un compte sur le site de MongoDB atlas et choisir le plan "gratuit"
+
+![image](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/53356222/371c77fb-0558-4d2a-9a0f-32b414f5f266)
+
+Une fois le compte crée, il faut se connecter sur la base de données MongoDB en local. Pour ce faire, il suffit d'aller sur l'onglet Database et puis choisir l'option connect pour configurer la connexion. On va choisir de se connecter via Compass.
+
+![image](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/53356222/d75f3e93-5685-47b0-9059-d60b494d0bdb)
+
+On va ensuite installer Compass en choisissant la configuration de notre système 
+
+![image](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/53356222/6c72ff5b-3217-4351-9218-676bd66570d7)
+
+Finalement, on va copier le string de connexion qui va permettre de se connecter à Atlas
+
+![image](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/53356222/2baf5d30-29e8-4799-a122-38557f3d9480)
+
+Après, on va exporter la base de données depuis le local en utilisant cette commande:
+```python
+mongodump --uri="mongodb://localhost:27017/parkinson" --archive=mydatabase.dump
+```
+Pour ensuite l'importer avec le string de connection qu'on a eu:
+```python
+mongorestore --uri="String ici" --archive=mydatabase.dump
+```
+
+Maintenant qu'on a les données sur Atlas, on procède au volet Charts et on construit les graphes désirés.
+Pour notre cas, on a obtenu ceci:
+
+![WhatsApp Image 2024-03-03 at 23 07 21_955a86af](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/53356222/91927e0e-8df2-41e3-9893-c1b346f9321d)
+
+![WhatsApp Image 2024-03-03 at 23 09 20_370148ca](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/53356222/65b267df-a813-4e58-a15b-223470dc8a12)
+
+![WhatsApp Image 2024-03-03 at 23 10 01_36b1eec7](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/53356222/b8ab3c9c-f4c1-41c5-be1d-a732ed03062a)
+
+
+
