@@ -549,6 +549,107 @@ cassandra.close()
 
 ### 6) Création du API REST de machine learning avec Flask et Sickit-learn :
 
+L'objectif principale de notre plateforme étant le diagnostique des patient il est temps de créer l'API REST contenant le modèle réalisant le diagnostic. Pour cela nous créons le fichier [model_api.py](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/blob/main/model_api.py) et nous importons les librairies suivantes :
+
+```python
+from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
+import pandas as pd
+import numpy as np
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, roc_curve, auc
+from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import train_test_split
+from mlxtend.evaluate import bias_variance_decomp
+from sklearn.neighbors import KNeighborsClassifier
+import pickle
+```
+
+Nous commençons par initialiser notre application flask comme suit :
+
+```python
+app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "*", "allow_headers": {"Access-Control-Allow-Origin"}}})
+app.config['CORS_HEADERS'] = 'Content-Type'
+```
+
+Puis nous créons notre endpoint de la manière suivante :
+
+```python
+@app.route('/api/model', methods=['POST'])
+@cross_origin(origin='*', headers=['content-type'])
+def model():
+    """
+    API endpoint pour entraîner un modèle KNN sur les données fournies.
+    """
+    if request.method == 'POST':
+        data = request.files.get('data')
+        columns_name = ["L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8", "L", "R", 'Class']
+        df = pd.DataFrame(data)
+
+        X = df.drop('Class', axis=1)
+        y = df['Class']
+        
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        
+        clf = KNeighborsClassifier(n_neighbors=5)
+        clf.fit(X_train, y_train)
+
+        # sauvegarder le modèle avec pickle
+        filename = 'knn.sav'
+        pickle.dump(clf, open(filename, 'wb'))
+
+        # charger le modèle avec pickle
+        loaded_model = pickle.load(open(filename, 'rb'))
+        
+        y_pred = clf.predict(X_test)
+
+        # Évaluer les performances du classifieur
+        accuracy = accuracy_score(y_test, y_pred)
+        precision = precision_score(y_test, y_pred, average='weighted')
+        recall = recall_score(y_test, y_pred, average='weighted')
+        f1 = f1_score(y_test, y_pred, average='weighted')
+
+        # Courbe ROC pour une classification multi-classe
+        y_prob = clf.predict_proba(X_test).argmax(axis=1)
+        macro_roc_auc_ovo = roc_auc_score(y_test.to_numpy(), y_prob, multi_class="ovo", average="macro")
+
+        # Matrice de confusion
+        cm = confusion_matrix(y_test, y_pred)
+
+        # Obtenir les valeurs TP, TN, FP, FN
+        FP = cm.sum(axis=0) - np.diag(cm)  
+        FN = cm.sum(axis=1) - np.diag(cm)
+        TP = np.diag(cm)
+        TN = cm.sum() - (FP + FN + TP)
+
+        # Obtenir le biais et la variance du classifieur
+        loss, bias, var = bias_variance_decomp(clf, X_train, y_train.to_numpy(), X_test, y_test.to_numpy(), loss='0-1_loss', random_seed=23)
+
+        return jsonify({'model': filename,
+                        'accuracy': accuracy,
+                        'precision': precision,
+                        'recall': recall,
+                        'f1': f1,
+                        'macro_roc_auc_ovo': macro_roc_auc_ovo,
+                        'confusion_matrix': cm,
+                        'TP': TP,
+                        'TN': TN,
+                        'FP': FP,
+                        'FN': FN,
+                        'bias': bias,
+                        'variance': var,
+                        'loss': loss})
+```
+
+Notre endpoint est accessible par la méthode HTTP POST. Lorsqu'une requête POST est reçue, la fonction `model` est déclenchée. Cette fonction charge des données envoyées dans la requête, les transforme en DataFrame Pandas, puis divise les données en ensembles d'entraînement et de test. Un modèle de classification des k plus proches voisins (KNN) est ensuite entraîné sur les données d'entraînement. Le modèle est sauvegardé en utilisant le module pickle, puis rechargé. Les performances du modèle sont évaluées à l'aide de métriques telles que l'exactitude, la précision, le rappel et le score F1. Une courbe ROC est générée pour une classification multi-classe, et une matrice de confusion est calculée. Les valeurs des vrais positifs, vrais négatifs, faux positifs et faux négatifs sont obtenues, tout comme le biais, la variance et la perte du classifieur. Les résultats de l'évaluation du modèle ainsi que diverses métriques sont renvoyés sous forme de réponse JSON.
+
+Pour terminer on lance notre API avec le code suivant :
+
+```python
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
 ### 7) Envoie des données de Cassandra a l'API :
 
 ### 8) Stockage des données retournées par l'API dans MongoDB :
