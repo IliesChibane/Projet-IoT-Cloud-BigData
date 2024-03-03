@@ -6,7 +6,13 @@ Le pipeline réalisé dans ce tutoriel sera comme illustré dans la figure ci de
 
 ![pipeline](readme-images/pipeline.png?raw=true)
 
+Ce data pipeline collecte des données de capteurs, d'API et d'appareils IoT via MQTT. Les données sont ensuite stockées dans un data lake Hadoop envoyé ensuite via kafka vers Spark qui traite les données et les stocke dans Cassandra. Ces données sont par la suite communiqué à une API REST créer avec flask conteant un modèle de machine learning disponible dans la bibliothéque Sickit-Learn retournant les résultats du modèle qui sont par la suite stocké dans MongoDB et ElasticSearch puis envoyé vers Kibana permetant de visualiser les différentes métriques obtenus.
+
+Ce pipeline est un exemple de la façon dont les données peuvent être collectées, stockées, traitées et analysées pour générer des informations utiles. Il peut être utilisé dans une variété d'applications, telles que la surveillance des performances, la détection de fraude, l'analyse des sentiments et la recommandation de produits.
+
 L'intégralité des outils illustré dans le pipeline seront intégrés en localhost via le langage de programmation Python et avec le système d'exploitation Ubuntu, nous passerons en revue l'integralité des installations nécessaire ainsi que la programation et paramètrage à réaliser pour faire fonctionner la pipeline.
+
+Dans un but d'accéssebilité et de simplicité nous simulerons les capteurs en utilisant le dataset  [Gait in Parkinson's Disease](https://physionet.org/content/gaitpdb/1.0.0/) un dataset contenant différent fichier txt représentant les données retourner par les capteurs sur différents patients.
 
 ## Intallation des différents outils :
 
