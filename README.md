@@ -222,10 +222,6 @@ mongod --version
 pip install pymongo
 ```
 
-### ElasticSearch :
-
-### Kibana :
-
 ### Hadoop :
 Suivez ce guide pour configurer un environnement Hadoop sur votre système.
 
@@ -314,7 +310,7 @@ pip install hdfs
 **Étape 1 :** Mettre à jour les paquets système
 Pour commencer le processus d'installation, ouvrez un terminal et mettez à jour les paquets de votre système en exécutant la commande suivante :
 ```bash
-sudo apt update
+sudo apt-get update
 ```
 
 **Étape 2 :** Télécharger Apache Spark 
