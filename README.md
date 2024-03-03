@@ -310,7 +310,156 @@ Une fois terminé le programme indique qu'il envoyé l'integralité des données
 
 ### 4) Réception des données et prétraitement avec Spark :
 
+Les données sont transmises à un notre programme coder dans le fichier [data_preprocess.py](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/blob/main/data_preprocess.py) qui a recours aux librairies suivantes :
+
+```python
+from confluent_kafka import Consumer, KafkaError
+import json
+from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType, StructField, IntegerType, FloatType
+from pyspark.sql.functions import col, row_number
+from pyspark.sql import Window
+from pyspark.sql.functions import mean
+import numpy as np
+```
+
+Cette partie nécessite 2 fonctions la première consistant à récupérer les données transmises par kafka comme montrer dans le bloc de code ci dessous :
+
+```python
+def retrieve_data(consumer, topic):
+    """
+    Récupérer les données à partir d'un topic Kafka.
+    """
+    consumer.subscribe([topic])
+    patient_data = dict()
+    print("En attente de messages...")
+    first_message = False
+    count = 0
+    while True:
+        msg = consumer.poll(1.0)
+
+        if msg is None:
+            if first_message:
+                break
+            else:
+                continue
+        if msg.error():
+            if msg.error().code() == KafkaError._PARTITION_EOF:
+                continue
+            else:
+                print(msg.error())
+                break
+
+        try:
+            first_message = True
+            data = json.loads(msg.value())
+            row = data["content"].split(";")
+            if len(row) == 19:
+                row = [float(x) for x in row]
+                row.append(0 if data["group"] == "Co" else 1)
+                if data["file_name"] not in patient_data:
+                    patient_data[data["file_name"]] = []
+                patient_data[data["file_name"]].append(row)
+            
+        except json.JSONDecodeError as e:
+            print(f"Erreur de décodage JSON : {e}")
+        except KeyError as e:
+            print(f"Clé manquante dans le JSON : {e}")
+
+    consumer.close()
+    print("Terminé")
+    return patient_data
+```
+
+Cette fonction est conçue pour récupérer des données depuis un topic Apache Kafka. Elle prend en paramètres un consommateur Kafka (`consumer`) et le sujet Kafka depuis lequel les données doivent être récupérées (`topic`). La fonction souscrit au sujet spécifié, initialise un dictionnaire vide pour stocker les données des patients, puis entre dans une boucle qui écoute continuellement les messages Kafka. Lorsqu'un message est reçu, la fonction le décode depuis le format JSON, extrait et transforme les données de la colonne "content" au format liste de nombres, ajoute une valeur binaire indiquant le groupe du patient, et stocke la ligne résultante dans le dictionnaire sous la clé correspondant au nom du fichier. La boucle continue jusqu'à ce qu'aucun nouveau message ne soit reçu pendant une seconde. Finalement, le consommateur Kafka est fermé, et le dictionnaire contenant les données des patients est renvoyé.
+
+Cela facilitant le travail de la deuxième fonction chargé du prétraitement des données qui prend en entré le résultat de la fonction précédante et qui réalise le traitement des données comme suit :
+
+```python
+def preprocess_data(patient_data):
+    """
+    Prétraiter les données en calculant la moyenne pour chaque groupe de 100 lignes.
+    """
+    spark = SparkSession.builder.appName('PatientData').getOrCreate()
+    spark.sparkContext.setLogLevel("ERROR")
+
+    schema = StructType([ 
+        StructField("Time", FloatType(), True),  
+        StructField("L1", FloatType(), True), 
+        StructField("L2", FloatType(), True), 
+        StructField("L3", FloatType(), True),
+        StructField("L4", FloatType(), True),
+        StructField("L5", FloatType(), True),
+        StructField("L6", FloatType(), True),
+        StructField("L7", FloatType(), True),
+        StructField("L8", FloatType(), True),
+        StructField("R1", FloatType(), True), 
+        StructField("R2", FloatType(), True), 
+        StructField("R3", FloatType(), True),
+        StructField("R4", FloatType(), True),
+        StructField("R5", FloatType(), True),
+        StructField("R6", FloatType(), True),
+        StructField("R7", FloatType(), True),
+        StructField("R8", FloatType(), True),
+        StructField("L", FloatType(), True),
+        StructField("R", FloatType(), True),
+        StructField("Class", IntegerType(), True)
+    ])
+
+    for patient in patient_data:
+        mean_values = []
+        patient_data[patient] = spark.createDataFrame(patient_data[patient], schema)
+        lenght = patient_data[patient].count()
+
+        for i in range(0, lenght, 100):
+            df_with_row_number = patient_data[patient].withColumn("row_number", row_number().over(Window.orderBy("Time")))
+
+            if i+100 > lenght:
+                end = lenght
+            else:
+                end = i+100
+            result_df = df_with_row_number.filter((col("row_number") >= i) & (col("row_number") < end))
+
+            result_df = result_df.drop("row_number")
+
+            mean_values.append(np.asarray(result_df.select(mean(result_df.L1), mean(result_df.L2), mean(result_df.L3), \
+                            mean(result_df.L4), mean(result_df.L5), mean(result_df.L6), \
+                            mean(result_df.L7), mean(result_df.L8), mean(result_df.R1), \
+                            mean(result_df.R2), mean(result_df.R3), mean(result_df.R4), \
+                            mean(result_df.R5), mean(result_df.R6), mean(result_df.R7), \
+                            mean(result_df.R8), mean(result_df.L), mean(result_df.R), \
+                            mean(result_df.Class)).collect()).tolist()[0])
+        
+        patient_data[patient] = mean_values
+
+    return patient_data
+```
+
+Conçue pour effectuer le prétraitement des données en utilisant Apache Spark. Elle prend en entrée un dictionnaire de données de patients (`patient_data`) et calcule la moyenne pour chaque groupe de 100 lignes dans chaque jeu de données du patient. La fonction utilise la bibliothèque Spark pour créer un DataFrame avec un schéma spécifié, puis itère sur chaque patient dans le dictionnaire. Pour chaque patient, elle divise le DataFrame en groupes de 100 lignes, calcule la moyenne pour chaque groupe sur les colonnes spécifiées, et stocke les valeurs moyennes dans une liste. Le résultat final est une mise à jour du dictionnaire `patient_data` avec les nouvelles valeurs moyennes pour chaque patient.
+
+Une fois terminer il suffit simplement de lancer le consomateur kafka et de faire appel à nos 2 fonctions :
+
+```python
+# Configuration du consommateur Kafka
+consumer_conf = {
+    'bootstrap.servers': 'localhost:9092',
+    'group.id': 'python-consumer',
+    'auto.offset.reset': 'earliest'
+}
+
+# Création de l'instance du consommateur Kafka
+consumer = Consumer(consumer_conf)
+
+patient_data = retrieve_data(consumer, "sensor_data")
+
+preprocessed_data = preprocess_data(patient_data)
+```
+
+Cela nous donne un ensemble de données prétraitées qui suffit simplement de stocker pour les utiliser ultérieurement.
+
 ### 5) Stockage des données prétraitées dans Cassandra :
+
+
 
 ### 6) Création du API REST de machine learning avec Flask et Sickit-learn :
 
