@@ -118,7 +118,22 @@ def preprocess_data(patient_data):
         StructField("Time", FloatType(), True),  
         StructField("L1", FloatType(), True), 
         StructField("L2", FloatType(), True), 
-        # ... Ajoutez les autres champs de structure ici ...
+        StructField("L3", FloatType(), True),
+        StructField("L4", FloatType(), True),
+        StructField("L5", FloatType(), True),
+        StructField("L6", FloatType(), True),
+        StructField("L7", FloatType(), True),
+        StructField("L8", FloatType(), True),
+        StructField("R1", FloatType(), True), 
+        StructField("R2", FloatType(), True), 
+        StructField("R3", FloatType(), True),
+        StructField("R4", FloatType(), True),
+        StructField("R5", FloatType(), True),
+        StructField("R6", FloatType(), True),
+        StructField("R7", FloatType(), True),
+        StructField("R8", FloatType(), True),
+        StructField("L", FloatType(), True),
+        StructField("R", FloatType(), True),
         StructField("Class", IntegerType(), True)
     ])
 
@@ -149,9 +164,6 @@ def preprocess_data(patient_data):
         patient_data[patient] = mean_values
 
     return patient_data
-
-def save_data(data):
-    pass
 
 # Configuration du consommateur Kafka
 consumer_conf = {
