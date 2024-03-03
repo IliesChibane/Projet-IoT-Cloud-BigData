@@ -99,20 +99,58 @@ La sortie dans le terminal devrait ressembler à ce qui suit, indiquant que le s
 ![KAFKA 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/b81eca2b-523a-44f5-8339-e5fd662ab4b6)
 
 ### Cassandra :
+Ce guide vous aidera à installer Apache Cassandra sur votre système.
+
+Étape 1 :Prérequis
+Vérifiez la version de Java installée sur votre système avec la commande suivante :
+```bash
+java -version
+```
 ![Cassandra 1](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/ffa62dbf-f3fe-4a3f-804c-d4d5a0579cb9)
 
 ![Cassandra 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/627d5b78-8940-44b9-9250-d50ac885b979)
 
+Étape 2 :Téléchargement de Cassandra
+Téléchargez la dernière version de Cassandra à l'aide de 'curl' :
+```bash
+curl -OL https://dlcdn.apache.org/cassandra/4.1.3/apache-cassandra-4.1.3-bin.tar.gz
+```
 ![Cassandra 3](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/fce42517-396c-488a-8742-7a2e1c0ad71b)
 
+Étape 3 :Vérification de l'intégrité du téléchargement
+Vérifiez l'intégrité du fichier téléchargé avec :
+```bash
+gpg --print-md SHA256 apache-cassandra-4.1.3-bin.tar.gz
+```
 ![Cassandra 4](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/f7449822-b792-4cb4-92c6-52a7e7d291ab)
 
+Téléchargez le fichier de signature SHA256 et vérifiez-le avec :
+```bash
+curl -L https://downloads.apache.org/cassandra/4.1.3/apache-cassandra-4.1.3-bin.tar.gz.sha256
+```
 ![Cassandra 5](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/75166060-3569-48ce-92bd-2dc3aefade07)
 
+
+Étape 4 :Extraction de l'archive Cassandra
+Extrayez Cassandra avec :
+```bash
+tar xzvf apache-cassandra-4.1.3-bin.tar.gz
+```
 ![Cassandra 6](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/c09da049-2189-49df-ac09-20e9da200bed)
 
+
+Étape 5 :Démarrage de Cassandra
+Accédez au répertoire de Cassandra et démarrez le serveur :
+```bash
+cd apache-cassandra-4.1.3 && bin/cassandra
+```
 ![Cassandra 7](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/16d9658f-99ab-4f83-89e9-0d3295322947)
 
+Étape 6 :Vérification du statut de Cassandra
+Utilisez la commande nodetool pour vérifier l'état du cluster Cassandra :
+```bash
+bin/nodetool status
+```
 ![Cassandra 8](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/3dfb8ebe-5eeb-4f79-97ab-4df7118a89c8)
 
 
