@@ -67,6 +67,11 @@ sudo service mosquitto status
 ![MQTT 5](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/13615498-a204-4d00-8160-56182aa7f7b6)
 Le service Mosquitto MQTT Broker est maintenant actif et fonctionnel.
 
+**Étape 5 :** Installation de la librairie python pour l'utilisation de MQTT
+```bash
+pip install paho-mqtt
+```
+
 ### Kafka :
 Ce guide vous aidera à installer et démarrer Apache Kafka.
 
@@ -97,6 +102,11 @@ bin/kafka-server-start.sh config/kraft/server.properties
 ```
 La sortie dans le terminal devrait ressembler à ce qui suit, indiquant que le serveur est actif.
 ![KAFKA 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/b81eca2b-523a-44f5-8339-e5fd662ab4b6)
+
+**Étape 3 :** Installation de la librairie python pour l'utilisation de kafka
+```bash
+pip install kafka-python confluent_kafka
+```
 
 ### Cassandra :
 Ce guide vous aidera à installer Apache Cassandra sur votre système.
@@ -153,6 +163,10 @@ bin/nodetool status
 ```
 ![Cassandra 8](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/3dfb8ebe-5eeb-4f79-97ab-4df7118a89c8)
 
+**Étape 7 :** Installation de la librairie python pour l'utilisation de Cassandra
+```bash
+pip install cassandra-driver
+```
 
 ### MongoDB :
 Ce guide explique comment installer MongoDB sur Ubuntu.
@@ -202,6 +216,11 @@ Vérifiez que MongoDB est correctement installé en vérifiant la version :
 mongod --version
 ```
 ![MongoDB 6](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/48b6e78d-a43c-4281-ba16-585b577aed3f)
+
+**Étape 7 :** Installation de la librairie python pour l'utilisation de MongoDB
+```bash
+pip install pymongo
+```
 
 ### ElasticSearch :
 
@@ -255,6 +274,10 @@ Démarrez les daemons Hadoop, y compris le NameNode, le DataNode et les services
 ![Hadoop 16](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/92c1a37f-13cb-4f3b-86f7-5099727a8eef)
 ![Hadoop 17](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/3cdce8fb-d346-4f51-a397-3793c025ef1b)
 ![Hadoop 18](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/813e31e8-1984-4835-a62d-51534d4d0ead)
+**Étape 12 :** Installation de la librairie python pour l'utilisation de Hadoop
+```bash
+pip install hdfs
+```
 
 ### Spark :
 
