@@ -28,7 +28,7 @@ sudo apt install python3
 
 ### MQTT :
 
-*Étape 1 : Ajout du dépôt Mosquitto*
+Étape 1 : Ajout du dépôt Mosquitto
 Ajoutez le PPA Mosquitto à vos sources de logiciels pour obtenir la dernière version de Mosquitto.
 ```bash
 sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa
@@ -42,11 +42,29 @@ sudo apt-get update
 ```
 ![MQTT 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/ea9d4760-1f67-4c57-912c-79497c252a81)
 
+
+Étape 2 : Installation de Mosquitto
+Installez le broker Mosquitto avec la commande suivante :
+```bash
+sudo apt-get install mosquitto
+```
+La sortie indique les paquets qui seront installés, y compris les dépendances et le paquet Mosquitto lui-même.
 ![MQTT 3](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/2e7c3712-4180-47ec-bdcd-3a9a188b002d)
 
+Étape 3 : Installation des clients Mosquitto
+Installez les clients Mosquitto, qui fournissent les commandes 'mosquitto_pub' et 'mosquitto_sub' pour publier et s'abonner aux topics MQTT.
+```bash
+sudo apt-get install mosquitto-clients
+```
 ![MQTT 4](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/72b6650f-8f44-49bb-8c6f-97ed4f03c469)
 
+Étape 4 : Vérification du statut du service Mosquitto
+Vérifiez que le service Mosquitto est actif et en cours d'exécution :
+```bash
+sudo service mosquitto status
+```
 ![MQTT 5](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/13615498-a204-4d00-8160-56182aa7f7b6)
+Le service Mosquitto MQTT Broker est maintenant actif et fonctionnel.
 
 ### Kafka :
 ![KAFKA 1](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/ef6716a3-9b5d-4cd9-8f3a-dea68c8802bf)
