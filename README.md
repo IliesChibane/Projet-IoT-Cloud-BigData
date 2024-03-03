@@ -231,57 +231,77 @@ Suivez ce guide pour configurer un environnement Hadoop sur votre système.
 
 **Étape 1 :** Installation de Java
 Vérifiez que Java est correctement installé et configuré sur votre système.
+
 ![Hadoop 2](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/177ba3c4-be48-4c95-b33c-7f92fc052f52)
 
 
 **Étape 2 :** Création d'un utilisateur Hadoop
 Créez un utilisateur spécifique pour Hadoop et configurez les informations d'utilisateur nécessaires.
+
 ![Hadoop 1](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/e6a934d4-1104-4892-80f4-f029e436d2c6)
 
 **Étape 3 :** Génération des clés SSH
 Générez une paire de clés SSH pour permettre à l'utilisateur Hadoop de se connecter en SSH sans mot de passe.
+
 ![Hadoop 3](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/012432aa-ebe0-48cc-aad8-243f040818fe)
 
 **Étape 4 :** Téléchargement de Hadoop
 Utilisez wget pour télécharger la distribution tarball de Hadoop depuis le [site officiel d'Apache](https://hadoop.apache.org/releases.html).
+
 ![Hadoop 4](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/d6f352a4-3be4-4628-bc2d-6f58f02222f2)
 
 **Étape 5 :** Extraction de Hadoop
 Extrayez l'archive téléchargée et déplacez le dossier Hadoop vers un emplacement souhaité.
+
 ![Hadoop 5](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/39436973-1987-4dba-b52b-0017f1edabe8)
 
 **Étape 6 :** Configuration de l'environnement Hadoop
-Définissez les variables d'environnement pour Java et Hadoop dans le fichier .bashrc de l'utilisateur.
+Définissez les variables d'environnement pour Java et Hadoop dans le fichier `.bashrc` de l'utilisateur.
+
 ![Hadoop 6](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/2be5a03c-0ecd-4f52-bd83-e07619d8b61a)
+
 Mettez à jour le fichier .bashrc pour prendre en compte les nouvelles variables d'environnement.
+
 ![Hadoop 7](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/8decb0b0-d00a-4331-a486-f1dcfeec897e)
+
 Ajoutez le chemin d'accès à Java dans le fichier de configuration Hadoop.
+
 ![Hadoop 8](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/1a198cd3-a65c-4eb2-bb88-c6db87516932)
 
 **Étape 7 :** Configuration du système de fichiers HDFS
-Configurez le système de fichiers HDFS en modifiant les fichiers de configuration de Hadoop, notamment core-site.xml.
+Configurez le système de fichiers HDFS en modifiant les fichiers de configuration de Hadoop, notamment `core-site.xml`.
+
 ![Hadoop 9](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/d95bffe8-1467-413b-a0b0-900a3287a8b9)
+
 ![Hadoop 10](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/8f8ef206-31f9-47a9-94fc-ca1cca1b23bb)
+
 Définissez le répertoire pour le NameNode et le DataNode.
+
 ![Hadoop 11](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/5f83f846-360a-4dde-bf8f-b6e1d09f5cbe)
 
 **Étape 8 :** Configuration de MapReduce
-Définissez le framework MapReduce en modifiant le fichier mapred-site.xml.
+Définissez le framework MapReduce en modifiant le fichier `mapred-site.xml`.
 ![Hadoop 12](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/45b8a037-83ea-4b09-8479-75b3048e75af)
 
 **Étape 9 :** Configuration de YARN
 Configurez YARN en modifiant le fichier yarn-site.xml pour définir le gestionnaire de ressources et d'autres propriétés.
+
 ![Hadoop 13](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/8c6063b0-82e7-4025-879e-140675ca1697)
 
 **Étape 10 :** Formatage du NameNode
 Formatez le NameNode pour initialiser le système de fichiers HDFS.
+
 ![Hadoop 14](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/43ffa409-495f-420a-acbf-7c2966fce12b)
 
 **Étape 11 :** Démarrage des daemons Hadoop
 Démarrez les daemons Hadoop, y compris le NameNode, le DataNode et les services YARN.
+
 ![Hadoop 15](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/a346d562-2893-422f-9903-4f76a228cd0d)
+
 ![Hadoop 16](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/92c1a37f-13cb-4f3b-86f7-5099727a8eef)
+
 ![Hadoop 17](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/3cdce8fb-d346-4f51-a397-3793c025ef1b)
+
 ![Hadoop 18](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/assets/144664907/813e31e8-1984-4835-a62d-51534d4d0ead)
 
 **Étape 12 :** Installation de la librairie python pour l'utilisation de Hadoop
