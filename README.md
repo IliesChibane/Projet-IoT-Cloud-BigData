@@ -652,4 +652,51 @@ if __name__ == '__main__':
 
 ### 7) Envoie des données de Cassandra a l'API :
 
+Notre API étant maintenant opérationel il est temps de lui faire appel en lui envoyant les données qu'on avait stocké sur cassandra. Nous réaliserons cela dans un programme créer dans le fichier [request_model.py](https://github.com/IliesChibane/Projet-IoT-Cloud-BigData/blob/main/request_model.py). Comme à notre habitude nous débutons par importer les libraires dont nous avons besoin :
+
+```python
+import requests
+from cassandra.cluster import Cluster
+import numpy as np
+```
+
+Ensuite, nous recréons notre classe Cassandra sans cependant recréer les espaces de clés ou la table et sans non plus réaliser l'insertion cela ayant dèja été effectué plus tot, cependant nous ajoutons une nouvelle fonction `get_data` dans notre classe qui via une requete CQL très simple nous permet de récupérer l'intégralité de nos données stockées.
+
+```python
+class Cassandra:
+    def __init__(self):
+        """
+        Initialiser une connexion à Cassandra et utiliser l'espace de clés Parkinson.
+        """
+        self.cluster = Cluster()
+        self.session = self.cluster.connect()
+        self.session.execute("USE Parkinson")
+
+    def get_data(self):
+        """
+        Récupérer les données à partir de la table Cassandra.
+        """
+        return np.asarray(self.session.execute("SELECT * FROM data"))
+
+    def close(self):
+        """
+        Fermer la connexion à Cassandra.
+        """
+        self.cluster.shutdown()
+```
+
+Maintenant nous récupérons nos données de la base sous format de `numpy array` et nous les envoyons à notre API via une requete `POST` nous et en utilisant son endpoint comme url.
+
+```python
+url = 'http://127.0.0.1:5000/api/model'
+
+# Initialiser la connexion à Cassandra, récupérer les données et fermer la connexion
+cassandra = Cassandra()
+dataset = cassandra.get_data()
+cassandra.close()
+
+# Envoyer les données au serveur Flask
+response = requests.post(url, files={'data': dataset})
+```
+
 ### 8) Stockage des données retournées par l'API dans MongoDB :
